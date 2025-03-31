@@ -11,8 +11,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-dev-key-do-not-use-in-production')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# Set debug to False for production, but if there are issues with static files, you can temporarily set to True
 DEBUG = False
+
+# Print settings for debugging
+print("BASE_DIR:", BASE_DIR)
 
 # Allow Render.com domains and your custom domain
 ALLOWED_HOSTS = ['adeptly.onrender.com', '.render.com', 'localhost', '127.0.0.1']
@@ -95,6 +98,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Make sure the static directory exists and print debug info
+print("STATIC_ROOT:", STATIC_ROOT)
+print("STATICFILES_DIRS:", STATICFILES_DIRS)
+
+import os.path
+if not os.path.exists(STATIC_ROOT):
+    os.makedirs(STATIC_ROOT)
+    print(f"Created directory: {STATIC_ROOT}")
+else:
+    print(f"Directory already exists: {STATIC_ROOT}")
+    
+# Create a simple static file directly (bypass Django if needed)
+empty_css = os.path.join(STATIC_ROOT, 'empty.css')
+if not os.path.exists(empty_css):
+    with open(empty_css, 'w') as f:
+        f.write('/* Empty file */\n')
+    print(f"Created file: {empty_css}")
 
 # WhiteNoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
