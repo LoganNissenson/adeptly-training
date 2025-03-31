@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="#f8f9fa" />
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold">Room Heating Load Calculation</text>
+  
+  <!-- Room Dimensions Text -->
+  <text x="400" y="70" text-anchor="middle" font-family="Arial" font-size="14">Room Dimensions: 15 ft × 20 ft × 9 ft</text>
+  
+  <!-- Room Plan View - Outline -->
+  <rect x="250" y="100" width="300" height="200" fill="#ffffff" stroke="#000000" stroke-width="3" />
+  
+  <!-- Room Plan Labels -->
+  <text x="390" y="190" text-anchor="middle" font-family="Arial" font-size="18">Room</text>
+  <text x="390" y="220" text-anchor="middle" font-family="Arial" font-size="14">Volume: 2,700 ft³</text>
+  
+  <!-- Dimension Lines -->
+  <line x1="250" y1="80" x2="550" y2="80" stroke="#555555" stroke-width="1" />
+  <line x1="250" y1="75" x2="250" y2="85" stroke="#555555" stroke-width="1" />
+  <line x1="550" y1="75" x2="550" y2="85" stroke="#555555" stroke-width="1" />
+  <text x="400" y="95" text-anchor="middle" font-family="Arial" font-size="12">15 ft</text>
+  
+  <line x1="570" y1="100" x2="570" y2="300" stroke="#555555" stroke-width="1" />
+  <line x1="565" y1="100" x2="575" y2="100" stroke="#555555" stroke-width="1" />
+  <line x1="565" y1="300" x2="575" y2="300" stroke="#555555" stroke-width="1" />
+  <text x="590" y="200" text-anchor="middle" font-family="Arial" font-size="12">20 ft</text>
+  
+  <!-- Windows and Walls -->
+  <rect x="250" y="100" width="300" height="10" fill="#ADD8E6" stroke="#0000FF" stroke-width="2" />
+  <text x="400" y="115" text-anchor="middle" font-family="Arial" font-size="12" fill="#0000FF">Exterior Wall</text>
+  
+  <rect x="250" y="100" width="10" height="200" fill="#ADD8E6" stroke="#0000FF" stroke-width="2" />
+  <text x="230" y="200" text-anchor="middle" font-family="Arial" font-size="12" fill="#0000FF">Exterior Wall</text>
+  
+  <!-- Windows -->
+  <rect x="270" y="100" width="40" height="10" fill="#B0E0E6" stroke="#000088" stroke-width="1" />
+  <rect x="350" y="100" width="40" height="10" fill="#B0E0E6" stroke="#000088" stroke-width="1" />
+  <rect x="250" y="150" width="10" height="40" fill="#B0E0E6" stroke="#000088" stroke-width="1" />
+  <text x="220" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#000088">Window</text>
+  
+  <!-- Room Properties Box -->
+  <rect x="100" y="320" width="600" height="150" fill="#EFEFEF" stroke="#333333" stroke-width="1" rx="5" ry="5" />
+  <text x="400" y="340" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">Room Properties</text>
+  
+  <!-- Room Properties - Column 1 -->
+  <text x="150" y="370" font-family="Arial" font-size="14">Indoor Design Temp: 72°F</text>
+  <text x="150" y="395" font-family="Arial" font-size="14">Outdoor Design Temp: 10°F</text>
+  <text x="150" y="420" font-family="Arial" font-size="14">Temperature Difference: 62°F</text>
+  <text x="150" y="445" font-family="Arial" font-size="14">Infiltration Rate: 0.5 ACH</text>
+  
+  <!-- Room Properties - Column 2 -->
+  <text x="450" y="370" font-family="Arial" font-size="14">Window Area: 50 ft²</text>
+  <text x="450" y="395" font-family="Arial" font-size="14">Window U-value: 0.35 BTU/hr·ft²·°F</text>
+  <text x="450" y="420" font-family="Arial" font-size="14">Wall Area: 250 ft²</text>
+  <text x="450" y="445" font-family="Arial" font-size="14">Wall U-value: 0.08 BTU/hr·ft²·°F</text>
+  
+  <!-- Heat Loss Arrows -->
+  <line x1="250" y1="150" x2="200" y2="150" stroke="#FF0000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="340" y1="100" x2="340" y2="60" stroke="#FF0000" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Infiltration Arrows -->
+  <path d="M210,130 C190,110 210,90 230,110" stroke="#0000FF" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M360,80 C380,60 400,70 390,90" stroke="#0000FF" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <text x="190" y="90" text-anchor="middle" font-family="Arial" font-size="12">Air Infiltration</text>
+  
+  <!-- Arrowhead Marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FF0000" />
+    </marker>
+  </defs>
+  
+  <!-- Question Box -->
+  <rect x="100" y="480" width="600" height="30" fill="#f0f0f0" stroke="#6c757d" stroke-width="1" rx="5" ry="5" />
+  <text x="400" y="500" text-anchor="middle" font-family="Arial" font-size="14" font-style="italic">What is the approximate heating load for the room?</text>
+</svg>

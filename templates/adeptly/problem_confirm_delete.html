@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Problem - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h2>Delete Problem</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            <p class="fs-5">Are you sure you want to delete the problem "{{ object.name }}"?</p>
+            <p>This action cannot be undone.</p>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Problem Details</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Topics:</strong> 
+                    {% for topic in object.topics.all %}
+                    <span class="badge bg-primary">{{ topic.name }}</span>
+                    {% endfor %}
+                </p>
+                <p><strong>Difficulty:</strong> 
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= object.difficulty %}
+                            <i class="text-warning">★</i>
+                        {% else %}
+                            <i class="text-muted">☆</i>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p><strong>Prompt:</strong> {{ object.prompt }}</p>
+            </div>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{% url 'problem-list' %}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Delete Problem</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

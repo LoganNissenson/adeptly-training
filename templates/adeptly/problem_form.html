@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if form.instance.id %}Edit Problem{% else %}New Problem{% endif %} - Adeptly Training
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{% if form.instance.id %}Edit Problem{% else %}Add New Problem{% endif %}</h2>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.name.id_for_label }}" class="form-label">Problem Name:</label>
+                        {{ form.name.errors }}
+                        <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" class="form-control" value="{{ form.name.value|default:'' }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.prompt.id_for_label }}" class="form-label">Problem Prompt:</label>
+                        {{ form.prompt.errors }}
+                        <textarea name="{{ form.prompt.name }}" id="{{ form.prompt.id_for_label }}" class="form-control" rows="4" required>{{ form.prompt.value|default:'' }}</textarea>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Difficulty:</label>
+                            {{ form.difficulty.errors }}
+                            <div class="btn-group w-100" role="group">
+                                {% for radio in form.difficulty %}
+                                <div class="form-check">
+                                    {{ radio.tag }}
+                                    <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                        {{ radio.choice_label }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="{{ form.estimated_time_to_complete.id_for_label }}" class="form-label">Time to Complete (minutes):</label>
+                            {{ form.estimated_time_to_complete.errors }}
+                            <input type="number" name="{{ form.estimated_time_to_complete.name }}" id="{{ form.estimated_time_to_complete.id_for_label }}" class="form-control" value="{{ form.estimated_time_to_complete.value|default:5 }}" min="1" max="30" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Topics:</label>
+                        {{ form.topics.errors }}
+                        <div class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
+                            {% for checkbox in form.topics %}
+                            <div class="form-check">
+                                {{ checkbox.tag }}
+                                <label class="form-check-label" for="{{ checkbox.id_for_label }}">
+                                    {{ checkbox.choice_label }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.choice_a.id_for_label }}" class="form-label">Choice A:</label>
+                        {{ form.choice_a.errors }}
+                        <input type="text" name="{{ form.choice_a.name }}" id="{{ form.choice_a.id_for_label }}" class="form-control" value="{{ form.choice_a.value|default:'' }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.choice_b.id_for_label }}" class="form-label">Choice B:</label>
+                        {{ form.choice_b.errors }}
+                        <input type="text" name="{{ form.choice_b.name }}" id="{{ form.choice_b.id_for_label }}" class="form-control" value="{{ form.choice_b.value|default:'' }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.choice_c.id_for_label }}" class="form-label">Choice C:</label>
+                        {{ form.choice_c.errors }}
+                        <input type="text" name="{{ form.choice_c.name }}" id="{{ form.choice_c.id_for_label }}" class="form-control" value="{{ form.choice_c.value|default:'' }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.choice_d.id_for_label }}" class="form-label">Choice D:</label>
+                        {{ form.choice_d.errors }}
+                        <input type="text" name="{{ form.choice_d.name }}" id="{{ form.choice_d.id_for_label }}" class="form-control" value="{{ form.choice_d.value|default:'' }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Correct Answer:</label>
+                        {{ form.correct_answer.errors }}
+                        <div class="btn-group w-100" role="group">
+                            {% for radio in form.correct_answer %}
+                            <div class="form-check">
+                                {{ radio.tag }}
+                                <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                    {{ radio.choice_label }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.problem_diagram.id_for_label }}" class="form-label">Problem Diagram:</label>
+                                {{ form.problem_diagram.errors }}
+                                <input type="file" name="{{ form.problem_diagram.name }}" id="{{ form.problem_diagram.id_for_label }}" class="form-control">
+                                {% if form.instance.problem_diagram %}
+                                <div class="mt-2">
+                                    <img src="{{ form.instance.problem_diagram.url }}" alt="Current Problem Diagram" class="img-thumbnail" style="max-height: 100px;">
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.solution_diagram.id_for_label }}" class="form-label">Solution Diagram:</label>
+                                {{ form.solution_diagram.errors }}
+                                <input type="file" name="{{ form.solution_diagram.name }}" id="{{ form.solution_diagram.id_for_label }}" class="form-control">
+                                {% if form.instance.solution_diagram %}
+                                <div class="mt-2">
+                                    <img src="{{ form.instance.solution_diagram.url }}" alt="Current Solution Diagram" class="img-thumbnail" style="max-height: 100px;">
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">
+                    {% if form.instance.id %}Update Problem{% else %}Add Problem{% endif %}
+                </button>
+                <a href="{% url 'problem-list' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

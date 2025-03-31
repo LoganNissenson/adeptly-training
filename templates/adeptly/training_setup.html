@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Training Setup - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="adeptly-header">
+    <h1>Start a Training Session</h1>
+    <p class="lead">Customize your training experience to fit your needs</p>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Training Preferences</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4>1. Select Topics</h4>
+                    <div class="topic-selector">
+                        {{ form.topics }}
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <h4>2. Choose Difficulty Levels</h4>
+                    <div class="difficulty-selector">
+                        {{ form.difficulty_levels }}
+                    </div>
+                    
+                    <h4 class="mt-4">3. Available Training Time</h4>
+                    <div class="mb-3">
+                        <label for="{{ form.time_available.id_for_label }}" class="form-label">Time in minutes:</label>
+                        <input type="range" class="form-range" id="{{ form.time_available.id_for_label }}" name="{{ form.time_available.name }}" min="5" max="120" step="5" value="{{ form.time_available.value|default:15 }}" oninput="updateTimeValue(this.value)">
+                        <div class="text-center" id="timeDisplay">15 minutes</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Estimated Problems:</h5>
+                            <div id="estimatedProblems" class="fs-3 fw-bold">3-5 problems</div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Potential Experience:</h5>
+                            <div id="potentialExperience" class="fs-3 fw-bold">50-100 XP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Start Training</button>
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updateTimeValue(val) {
+        document.getElementById('timeDisplay').innerHTML = val + ' minutes';
+        
+        // Update estimates based on time
+        let minProblems = Math.floor(val / 5);
+        let maxProblems = Math.ceil(val / 3);
+        document.getElementById('estimatedProblems').innerHTML = minProblems + '-' + maxProblems + ' problems';
+        
+        let minXP = minProblems * 10;
+        let maxXP = maxProblems * 20;
+        document.getElementById('potentialExperience').innerHTML = minXP + '-' + maxXP + ' XP';
+    }
+    
+    // Initialize estimates
+    document.addEventListener('DOMContentLoaded', function() {
+        let initialTime = document.getElementById('{{ form.time_available.id_for_label }}').value;
+        updateTimeValue(initialTime);
+    });
+</script>
+{% endblock %}

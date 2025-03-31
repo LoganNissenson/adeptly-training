@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load math_filters %}
+
+{% block title %}Training Problem - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Problem {{ problem_number }} of {{ total_problems }}</h2>
+    <div class="badge bg-primary fs-5">
+        Difficulty: 
+        {% for i in "12345" %}
+            {% if forloop.counter <= problem.difficulty %}
+                ★
+            {% else %}
+                ☆
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="progress mb-4" style="height: 10px;">
+    <div class="progress-bar" role="progressbar" style="width: {{ problem_number|mul:100|div:total_problems }}%"></div>
+</div>
+
+<div class="problem-container">
+    <div class="mb-4">
+        <h3 class="mb-3">{{ problem.name }}</h3>
+        <p class="fs-5">{{ problem.prompt }}</p>
+    </div>
+    
+    {% if problem.problem_diagram %}
+    <div class="text-center mb-4">
+        <img src="{{ problem.problem_diagram.url }}" alt="Problem Diagram" class="problem-image img-fluid">
+    </div>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="answer-options">
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="answer" id="answer_a" value="A" required>
+                <label class="form-check-label answer-option" for="answer_a">
+                    <strong>A.</strong> {{ problem.choice_a }}
+                </label>
+            </div>
+            
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="answer" id="answer_b" value="B">
+                <label class="form-check-label answer-option" for="answer_b">
+                    <strong>B.</strong> {{ problem.choice_b }}
+                </label>
+            </div>
+            
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="answer" id="answer_c" value="C">
+                <label class="form-check-label answer-option" for="answer_c">
+                    <strong>C.</strong> {{ problem.choice_c }}
+                </label>
+            </div>
+            
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="answer" id="answer_d" value="D">
+                <label class="form-check-label answer-option" for="answer_d">
+                    <strong>D.</strong> {{ problem.choice_d }}
+                </label>
+            </div>
+        </div>
+        
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Submit Answer</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Make entire answer option clickable
+    document.querySelectorAll('.answer-option').forEach(option => {
+        option.addEventListener('click', function() {
+            // Find the associated radio input
+            const radioId = this.getAttribute('for');
+            document.getElementById(radioId).checked = true;
+            
+            // Reset all options styling
+            document.querySelectorAll('.answer-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class
+            this.classList.add('selected');
+        });
+    });
+</script>
+{% endblock %}

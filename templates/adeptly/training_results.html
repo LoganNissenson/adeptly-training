@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load math_filters %}
+
+{% block title %}Training Results - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="adeptly-header">
+    <h1>Training Session Results</h1>
+    <p class="lead">Session completed on {{ session.completed_at|date:"F j, Y g:i a" }}</p>
+</div>
+
+<div class="results-panel mb-4">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <h3>Score</h3>
+            <div class="score">{{ accuracy|floatformat:0 }}%</div>
+            <p>{{ correct }} correct out of {{ total_problems }}</p>
+        </div>
+        
+        <div class="col-md-4 text-center">
+            <h3>Experience Earned</h3>
+            <div class="score text-success">+{{ total_exp_earned }}</div>
+            <p>Total XP from this session</p>
+        </div>
+        
+        <div class="col-md-4 text-center">
+            <h3>Topics Covered</h3>
+            <div class="score">{{ session.topics_covered.count }}</div>
+            <p>Topics trained in this session</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Experience Breakdown</h3>
+            </div>
+            <div class="card-body">
+                {% for item in experience_breakdown %}
+                <div class="mb-3">
+                    <h5>{{ item.topic__name }}</h5>
+                    <div class="experience-bar">
+                        <div class="experience-progress" style="width: {{ item.total_exp|mul:100|div:total_exp_earned }}%"></div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>+{{ item.total_exp }} XP</span>
+                        <span>{{ item.total_exp|mul:100|div:total_exp_earned|floatformat:0 }}%</span>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center">No experience earned in this session.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Completed Problems</h3>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for problem in session.problems.all %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-1">{{ problem.name }}</h5>
+                            {% if problem in session.problems_completed.all %}
+                            <span class="badge bg-success">Correct</span>
+                            {% else %}
+                            <span class="badge bg-danger">Incorrect</span>
+                            {% endif %}
+                        </div>
+                        <p class="mb-1">Topics: 
+                            {% for topic in problem.topics.all %}
+                            <span class="badge bg-primary">{{ topic.name }}</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    {% empty %}
+                    <p class="text-center">No problems in this session.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-grid gap-2 mt-4">
+    <a href="{% url 'training_setup' %}" class="btn btn-primary btn-lg">Start New Training Session</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Return to Dashboard</a>
+</div>
+{% endblock %}

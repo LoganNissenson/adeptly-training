@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Problem Preview - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Problem Preview</h2>
+    <div class="badge bg-primary fs-5">
+        Difficulty: 
+        {% for i in "12345" %}
+            {% if forloop.counter <= problem.difficulty %}
+                ★
+            {% else %}
+                ☆
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="problem-container">
+    <div class="mb-4">
+        <h3 class="mb-3">{{ problem.name }}</h3>
+        <p class="fs-5">{{ problem.prompt }}</p>
+    </div>
+    
+    {% if problem.problem_diagram %}
+    <div class="text-center mb-4">
+        <img src="{{ problem.problem_diagram.url }}" alt="Problem Diagram" class="problem-image img-fluid">
+    </div>
+    {% endif %}
+    
+    <div class="answer-options">
+        <div class="card mb-3 {% if problem.correct_answer == 'A' %}border-success{% endif %}">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>A.</strong> {{ problem.choice_a }}
+                </h5>
+                {% if problem.correct_answer == 'A' %}
+                <div class="mt-2 text-success">
+                    <i class="bi bi-check-circle-fill"></i> Correct Answer
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mb-3 {% if problem.correct_answer == 'B' %}border-success{% endif %}">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>B.</strong> {{ problem.choice_b }}
+                </h5>
+                {% if problem.correct_answer == 'B' %}
+                <div class="mt-2 text-success">
+                    <i class="bi bi-check-circle-fill"></i> Correct Answer
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mb-3 {% if problem.correct_answer == 'C' %}border-success{% endif %}">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>C.</strong> {{ problem.choice_c }}
+                </h5>
+                {% if problem.correct_answer == 'C' %}
+                <div class="mt-2 text-success">
+                    <i class="bi bi-check-circle-fill"></i> Correct Answer
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mb-3 {% if problem.correct_answer == 'D' %}border-success{% endif %}">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>D.</strong> {{ problem.choice_d }}
+                </h5>
+                {% if problem.correct_answer == 'D' %}
+                <div class="mt-2 text-success">
+                    <i class="bi bi-check-circle-fill"></i> Correct Answer
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <p><strong>Estimated time to complete:</strong> {{ problem.estimated_time_to_complete }} minutes</p>
+        <p><strong>Topics:</strong>
+            {% for topic in problem.topics.all %}
+            <span class="badge bg-primary">{{ topic.name }}</span>
+            {% endfor %}
+        </p>
+    </div>
+    
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'problem-list' %}" class="btn btn-secondary">Back to Problem List</a>
+        <div>
+            <a href="{% url 'problem-update' problem.id %}" class="btn btn-warning">Edit Problem</a>
+            <a href="{% url 'problem-delete' problem.id %}" class="btn btn-danger">Delete Problem</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

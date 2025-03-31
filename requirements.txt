@@ -1,0 +1,4 @@
+Django==4.2.10
+gunicorn==21.2.0
+Pillow==10.1.0  # For image processing
+whitenoise==6.5.0  # For static files in production

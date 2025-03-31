@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load math_filters %}
+
+{% block title %}Leaderboard - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="adeptly-header">
+    <h1>Engineering Excellence Leaderboard</h1>
+    <p class="lead">See who's leading in experience across all topics and in specific disciplines</p>
+</div>
+
+<!-- Topic Filter -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Filter by Topic</h5>
+        <form method="get" class="d-flex">
+            <select name="topic" class="form-select me-2">
+                <option value="">Overall Rankings</option>
+                {% for topic in topics %}
+                <option value="{{ topic.id }}" {% if selected_topic and selected_topic.id == topic.id %}selected{% endif %}>{{ topic.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </form>
+    </div>
+</div>
+
+<!-- User Rank Information -->
+{% if user.is_authenticated and user_rank %}
+<div class="card mb-4 bg-light">
+    <div class="card-body">
+        <h5 class="card-title">Your Ranking</h5>
+        <p class="mb-0">
+            You are ranked <strong>#{{ user_rank }}</strong> overall
+            {% if selected_topic %}
+            {% if user_topic_rank %}
+            and <strong>#{{ user_topic_rank }}</strong> in {{ selected_topic.name }}
+            {% else %}
+            but you haven't earned any XP in {{ selected_topic.name }} yet
+            {% endif %}
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <!-- Overall Leaderboard -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Overall Leaderboard</h3>
+                <p class="mb-0">Top users across all topics</p>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user_obj in overall_leaderboard %}
+                            <tr {% if user_obj == user %}class="table-primary"{% endif %}>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ user_obj.username }}</td>
+                                <td>{{ user_obj.total_experience }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center py-3">No users have earned experience yet</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Topic Leaderboard -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>{% if selected_topic %}{{ selected_topic.name }}{% else %}Topic-Specific{% endif %} Leaderboard</h3>
+                <p class="mb-0">{% if selected_topic %}Top users in {{ selected_topic.name }}{% else %}Select a topic to see rankings{% endif %}</p>
+            </div>
+            <div class="card-body p-0">
+                {% if selected_topic %}
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>Rank</th>
+                                <th>Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stat in topic_leaderboard %}
+                            <tr {% if stat.user == user %}class="table-primary"{% endif %}>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ stat.user.username }}</td>
+                                <td><span class="badge bg-secondary">{{ stat.rank.name }}</span></td>
+                                <td>{{ stat.experience }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center py-3">No users have earned experience in this topic yet</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <p>Select a topic from the filter above to see topic-specific rankings</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fun Facts and Stats -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Training Stats</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 text-center mb-3">
+                <h5>Total Users</h5>
+                <div class="display-5 text-primary">
+                    {{ total_users_with_exp }}
+                </div>
+                <p>users earning experience</p>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+                <h5>Most Popular Topic</h5>
+                {% if most_popular_topic %}
+                <div class="display-5 text-primary">
+                    {{ most_popular_topic }}
+                </div>
+                <p>most trained by users</p>
+                {% else %}
+                <div class="display-5 text-muted">
+                    -
+                </div>
+                <p>no training data yet</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4 text-center mb-3">
+                <h5>Top User Experience</h5>
+                <div class="display-5 text-primary">
+                    {{ top_exp }}
+                </div>
+                <p>earned by leading engineer</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

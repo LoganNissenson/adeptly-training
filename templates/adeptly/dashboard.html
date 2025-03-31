@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="adeptly-header">
+    <h1>Welcome to Adeptly Training, {{ user.first_name|default:user.username }}</h1>
+    <p class="lead">Your MEP engineering training platform</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-2">
+        <div class="stat-card">
+            <div class="stat-title">Your Rank</div>
+            <div class="stat-value">#{{ user_stats.rank }}</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="stat-card">
+            <div class="stat-title">Total Experience</div>
+            <div class="stat-value">{{ user_stats.total_experience }}</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="stat-card">
+            <div class="stat-title">Topics Trained</div>
+            <div class="stat-value">{{ user_stats.topics_trained }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-title">Problems Solved</div>
+            <div class="stat-value">{{ user_stats.problems_solved }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-title">Training Sessions</div>
+            <div class="stat-value">{{ user_stats.recent_sessions.count }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title">Quick Actions</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-3">
+                    <a href="{% url 'training_setup' %}" class="btn btn-primary btn-lg">Start Training Session</a>
+                    <a href="{% url 'leaderboard' %}" class="btn btn-outline-primary">View Leaderboard</a>
+                    <a href="{% url 'problem-list' %}" class="btn btn-outline-primary">Manage Training Problems</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Recent Training Sessions</h3>
+            </div>
+            <div class="card-body">
+                {% if user_stats.recent_sessions %}
+                    <div class="list-group">
+                        {% for session in user_stats.recent_sessions %}
+                        <a href="{% url 'training_results' session_id=session.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Session on {{ session.created_at|date:"F j, Y" }}</h5>
+                                <small>{{ session.problems.count }} problems</small>
+                            </div>
+                            <p class="mb-1">
+                                {% if session.was_completed %}
+                                    Completed: {{ session.correct_attempts }} correct out of {{ session.problems.count }}
+                                {% else %}
+                                    Incomplete
+                                {% endif %}
+                            </p>
+                        </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-center py-3">No training sessions yet. Click "Start Training Session" to begin.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

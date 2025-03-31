@@ -1,0 +1,139 @@
+/* Adeptly Training CSS - Inspired by HVAC equipment color palette */
+
+:root {
+    --light-gray: #DBE0DE;
+    --dark-blue: #172532;
+    --blue: #88B6CD;
+    --medium-gray: #7E8B90;
+    --light-blue-gray: #B7C3BF;
+}
+
+/* Custom Header Styles */
+.adeptly-header {
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.adeptly-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Dashboard Stat Cards */
+.stat-card {
+    background-color: white;
+    border-left: 5px solid var(--blue);
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card .stat-title {
+    font-size: 1.1rem;
+    color: var(--medium-gray);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+/* Training Setup */
+.topic-selector .form-check {
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.topic-selector .form-check:hover {
+    background-color: var(--light-blue-gray);
+}
+
+/* Problem Display */
+.problem-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.problem-image {
+    max-width: 100%;
+    margin: 1rem 0;
+    border: 1px solid var(--medium-gray);
+    border-radius: 5px;
+}
+
+.answer-option {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background-color: white;
+    border: 1px solid var(--light-blue-gray);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.answer-option:hover {
+    background-color: var(--light-gray);
+}
+
+.answer-option.selected {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+/* Results Panel */
+.results-panel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.results-panel .score {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+.experience-bar {
+    height: 10px;
+    background-color: var(--light-blue-gray);
+    border-radius: 5px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.experience-progress {
+    height: 100%;
+    background-color: var(--blue);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .adeptly-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stat-card .stat-value {
+        font-size: 2rem;
+    }
+}

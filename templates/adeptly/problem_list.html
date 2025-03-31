@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Problems - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Training Problems</h1>
+    <a href="{% url 'problem-create' %}" class="btn btn-primary">Add New Problem</a>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Filter Problems</h3>
+    </div>
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-5">
+                <label for="topic" class="form-label">Topic:</label>
+                <select name="topic" id="topic" class="form-select">
+                    <option value="">All Topics</option>
+                    {% for topic in topics %}
+                    <option value="{{ topic.id }}" {% if request.GET.topic == topic.id|stringformat:"i" %}selected{% endif %}>
+                        {{ topic.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="difficulty" class="form-label">Difficulty:</label>
+                <select name="difficulty" id="difficulty" class="form-select">
+                    <option value="">All Difficulties</option>
+                    {% for level_id, level_name in difficulty_levels %}
+                    <option value="{{ level_id }}" {% if request.GET.difficulty == level_id|stringformat:"i" %}selected{% endif %}>
+                        {{ level_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if problems %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Problem</th>
+                <th>Topics</th>
+                <th>Difficulty</th>
+                <th>Est. Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for problem in problems %}
+            <tr>
+                <td>{{ problem.name }}</td>
+                <td>
+                    {% for topic in problem.topics.all %}
+                    <span class="badge bg-primary">{{ topic.name }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= problem.difficulty %}
+                            <i class="text-warning">★</i>
+                        {% else %}
+                            <i class="text-muted">☆</i>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ problem.estimated_time_to_complete }} min</td>
+                <td>
+                    <a href="{% url 'problem-preview' problem.id %}" class="btn btn-sm btn-primary">Preview</a>
+                    <a href="{% url 'problem-update' problem.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'problem-delete' problem.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    <p>No problems found with the current filters. <a href="{% url 'problem-create' %}">Add a problem</a> to get started.</p>
+</div>
+{% endif %}
+{% endblock %}
