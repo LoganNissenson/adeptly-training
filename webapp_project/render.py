@@ -66,12 +66,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'webapp_project.wsgi.application'
 
 # Database
+# Use SQLite for both local development and Render.com deployment
+# Note: In the free tier of Render, this database will be reset on each deployment
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+print(f"Using SQLite database at: {os.path.join(BASE_DIR, 'db.sqlite3')}")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

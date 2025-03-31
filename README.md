@@ -1,90 +1,51 @@
-# Adeptly Training
+# Adeptly Training Platform
 
-A Django web application for MEP (mechanical, electrical, and plumbing) engineering firms to monitor and grow the core knowledge base of their employees.
+A training platform for MEP (mechanical, electrical, and plumbing) engineering professionals.
 
-## Overview
+## Deployment Information
 
-Adeptly is a platform that allows MEP engineering professionals to:
+### Render.com Free Tier Limitations
 
-- Practice with customized training sessions based on topics and difficulty
-- Track progress and experience earned across different engineering topics
-- Prepare for professional engineering exams with targeted practice problems
+When deploying on Render.com's free tier, please be aware of the following limitations:
 
-The platform also enables managers to:
-- Objectively assess employee competency across topics
-- Identify areas where employees may need additional training
-- Provide specific practice problems for struggling topics
+1. **Database Persistence**: The SQLite database will be reset on each new deployment or when the service restarts. This means any user data, training sessions, or custom problems will be lost.
 
-## Setup Instructions
+2. **Initial Data**: The application automatically initializes with basic topics, ranks, and sample engineering problems on each deployment.
 
-1. Clone the repository to your local machine.
-2. Create a virtual environment:
-   ```
-   python -m venv venv
-   ```
+3. **Usage Recommendations**:
+   - Use the free deployment mainly for demonstration purposes
+   - For actual usage, consider upgrading to Render's Starter plan ($7/month) which includes persistent disk storage
+   - Alternatively, configure the application to use an external database service
+
+## Local Development
+
+For local development, follow these steps:
+
+1. Clone the repository
+2. Create a virtual environment: `python -m venv venv`
 3. Activate the virtual environment:
-   - On Windows:
-     ```
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```
-     source venv/bin/activate
-     ```
-4. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-5. Run migrations:
-   ```
-   python manage.py makemigrations adeptly
-   python manage.py migrate
-   ```
-6. Create a superuser (admin):
-   ```
-   python manage.py createsuperuser
-   ```
-7. Run the development server:
-   ```
-   python manage.py runserver
-   ```
-8. Access the application in your browser at http://127.0.0.1:8000/
-
-## Initial Setup
-
-After installation, you'll need to:
-
-1. Create topics in the admin interface (e.g., HVAC Design, Electrical Code, Plumbing Systems)
-2. Create ranks (e.g., Beginner, Intermediate, Advanced, Expert)
-3. Add training problems with answers, topics, difficulty levels, and time estimates
+   - Windows: `venv\Scripts\activate`
+   - macOS/Linux: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Run migrations: `python manage.py migrate`
+6. Initialize basic data: `python manage.py initialize_adeptly`
+7. Load sample problems: `python manage.py import_engineering_problems`
+8. Start the development server: `python manage.py runserver`
 
 ## Features
 
-- User authentication and profiles
-- Training session setup with customizable parameters
-- Multiple-choice problem interface with interactive elements
-- Experience tracking and statistics
-- Problem management interface
+- Customizable training sessions based on topics and difficulty levels
+- Experience points and progression system
+- Problem management and creation
+- Performance tracking and analytics
+- Leaderboards
 
 ## Project Structure
 
-- `adeptly/`: Main application code
-  - `models.py`: Database models (User, Topic, Problem, etc.)
-  - `views.py`: View functions and classes
-  - `forms.py`: Form classes
-  - `urls.py`: URL patterns
+The project follows a standard Django application structure. The main components are:
+
+- `adeptly/`: Main application package
+- `webapp_project/`: Project settings module
 - `templates/`: HTML templates
-  - `base.html`: Base template with common elements
-  - `adeptly/`: Application-specific templates
-- `static/`: Static files (CSS, JavaScript)
-- `media/`: User-uploaded files (problem diagrams)
-
-## Color Palette
-
-Based on HVAC equipment colors:
-- Light Gray: #DBE0DE
-- Dark Blue: #172532
-- Blue: #88B6CD
-- Medium Gray: #7E8B90
-- Light Blue-Gray: #B7C3BF
-#test comment 
+- `static/`: Static files (CSS, JS, images)
+- `media/`: User-uploaded files

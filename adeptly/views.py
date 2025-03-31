@@ -3,11 +3,28 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
 from django.utils import timezone
 from django.db.models import Sum, Count, Q, F, Value, IntegerField, Case, When
 
 from .models import User, Topic, Problem, TrainingSession, UserTopicStats, TopicExperienceEarned, Rank
-from .forms import ProblemForm, TrainingPreferencesForm
+from .forms import ProblemForm, TrainingPreferencesForm, RegistrationForm
+
+def register(request):
+    """User registration view"""
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Automatically log the user in after registration
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = RegistrationForm()
+    return render(request, 'adeptly/register.html', {'form': form})
 
 @login_required
 def dashboard(request):

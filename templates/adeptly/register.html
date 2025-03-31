@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Create an Account</h2>
+                <p class="text-muted">Join Adeptly to start improving your engineering skills</p>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="id_username" class="form-label">Username</label>
+                            <input type="text" name="username" id="id_username" class="form-control" required>
+                            {% if form.username.errors %}
+                                <div class="text-danger">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="id_email" class="form-label">Email</label>
+                            <input type="email" name="email" id="id_email" class="form-control" required>
+                            {% if form.email.errors %}
+                                <div class="text-danger">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">Required. Enter a valid email address.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="id_first_name" class="form-label">First Name</label>
+                            <input type="text" name="first_name" id="id_first_name" class="form-control" required>
+                            {% if form.first_name.errors %}
+                                <div class="text-danger">
+                                    {{ form.first_name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="id_last_name" class="form-label">Last Name</label>
+                            <input type="text" name="last_name" id="id_last_name" class="form-control" required>
+                            {% if form.last_name.errors %}
+                                <div class="text-danger">
+                                    {{ form.last_name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="id_password1" class="form-label">Password</label>
+                            <input type="password" name="password1" id="id_password1" class="form-control" required>
+                            {% if form.password1.errors %}
+                                <div class="text-danger">
+                                    {{ form.password1.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <ul>
+                                    <li>Your password can't be too similar to your other personal information.</li>
+                                    <li>Your password must contain at least 8 characters.</li>
+                                    <li>Your password can't be a commonly used password.</li>
+                                    <li>Your password can't be entirely numeric.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="id_password2" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" id="id_password2" class="form-control" required>
+                            {% if form.password2.errors %}
+                                <div class="text-danger">
+                                    {{ form.password2.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">Enter the same password as before, for verification.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <p class="text-center mt-2">
+                            Already have an account? <a href="{% url 'login' %}">Login</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
