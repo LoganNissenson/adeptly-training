@@ -1,8 +1,12 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .simple_views import simple_home
 
 urlpatterns = [
+    # Simple test home page (temporary)
+    path('simple/', simple_home, name='simple_home'),
+    
     # Dashboard
     path('', views.dashboard, name='dashboard'),
     

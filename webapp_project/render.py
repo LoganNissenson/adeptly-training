@@ -11,14 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-dev-key-do-not-use-in-production')
 
-# Set debug to False for production, but if there are issues with static files, you can temporarily set to True
-DEBUG = False
+# Set debug to True temporarily to see detailed error messages
+DEBUG = True
 
 # Print settings for debugging
 print("BASE_DIR:", BASE_DIR)
 
 # Allow Render.com domains and your custom domain
-ALLOWED_HOSTS = ['adeptly.onrender.com', '.render.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['adeptly-training.onrender.com', 'adeptly.onrender.com', '.render.com', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cors_middleware.CorsMiddleware',  # Add CORS middleware
 ]
 
 ROOT_URLCONF = 'webapp_project.urls'
@@ -132,7 +133,8 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 
 # Security settings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# Temporarily disable these security settings to troubleshoot the 400 error
+SECURE_SSL_REDIRECT = False  # Set to True after fixing the 400 error
+SESSION_COOKIE_SECURE = False  # Set to True after fixing the 400 error
+CSRF_COOKIE_SECURE = False  # Set to True after fixing the 400 error
 SECURE_BROWSER_XSS_FILTER = True

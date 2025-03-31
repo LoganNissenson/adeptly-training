@@ -10,7 +10,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: False
+        value: True
       - key: DISABLE_COLLECTSTATIC
         value: 1
       - key: PYTHON_VERSION
