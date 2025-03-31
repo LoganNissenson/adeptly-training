@@ -2,10 +2,138 @@
 
 {% block title %}Manage Problems - Adeptly Training{% endblock %}
 
+{% block extrajs %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle topic form submission
+        const topicForm = document.getElementById('topic-form');
+        if (topicForm) {
+            topicForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(topicForm);
+                
+                // Send AJAX request
+                fetch(topicForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Add new topic to the table
+                        const topicsTable = document.getElementById('topics-table');
+                        const tbody = topicsTable.querySelector('tbody');
+                        
+                        // Remove 'no topics' message if present
+                        const noTopicsRow = document.getElementById('no-topics-row');
+                        if (noTopicsRow) {
+                            noTopicsRow.remove();
+                        }
+                        
+                        // Create new row
+                        const newRow = document.createElement('tr');
+                        newRow.dataset.topicId = data.id;
+                        newRow.innerHTML = `
+                            <td>${data.name}</td>
+                            <td>
+                                <a href="/topics/${data.id}/update/" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="/topics/${data.id}/delete/" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        `;
+                        
+                        tbody.appendChild(newRow);
+                        
+                        // Clear the form
+                        topicForm.reset();
+                        
+                        // Add to topic filter dropdown
+                        const topicSelect = document.getElementById('topic');
+                        if (topicSelect) {
+                            const option = document.createElement('option');
+                            option.value = data.id;
+                            option.textContent = data.name;
+                            topicSelect.appendChild(option);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Training Problems</h1>
-    <a href="{% url 'problem-create' %}" class="btn btn-primary">Add New Problem</a>
+    <div>
+        <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#topicModal">
+            Manage Topics
+        </button>
+        <a href="{% url 'problem-create' %}" class="btn btn-primary">Add New Problem</a>
+    </div>
+</div>
+
+<!-- Topic Management Modal -->
+<div class="modal fade" id="topicModal" tabindex="-1" aria-labelledby="topicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="topicModalLabel">Manage Topics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <form method="post" action="{% url 'topic-create' %}" id="topic-form">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                {{ topic_form.name }}
+                                <button type="submit" class="btn btn-primary">Add Topic</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped" id="topics-table">
+                        <thead>
+                            <tr>
+                                <th>Topic Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for topic in topics %}
+                            <tr data-topic-id="{{ topic.id }}">
+                                <td>{{ topic.name }}</td>
+                                <td>
+                                    <a href="{% url 'topic-update' topic.id %}" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="{% url 'topic-delete' topic.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr id="no-topics-row">
+                                <td colspan="2" class="text-center">No topics available. Add a topic to get started.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="card mb-4">

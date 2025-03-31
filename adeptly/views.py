@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
@@ -8,7 +9,7 @@ from django.utils import timezone
 from django.db.models import Sum, Count, Q, F, Value, IntegerField, Case, When
 
 from .models import User, Topic, Problem, TrainingSession, UserTopicStats, TopicExperienceEarned, Rank
-from .forms import ProblemForm, TrainingPreferencesForm, RegistrationForm
+from .forms import ProblemForm, TrainingPreferencesForm, RegistrationForm, TopicForm
 
 def register(request):
     """User registration view"""
@@ -250,6 +251,7 @@ class ProblemListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['topics'] = Topic.objects.all()
         context['difficulty_levels'] = Problem.DIFFICULTY_CHOICES
+        context['topic_form'] = TopicForm()
         return context
 
 class ProblemCreateView(LoginRequiredMixin, CreateView):
@@ -268,6 +270,49 @@ class ProblemDeleteView(LoginRequiredMixin, DeleteView):
     model = Problem
     template_name = 'adeptly/problem_confirm_delete.html'
     success_url = reverse_lazy('problem-list')
+
+
+class TopicCreateView(LoginRequiredMixin, CreateView):
+    model = Topic
+    form_class = TopicForm
+    template_name = 'adeptly/topic_form.html'
+    success_url = reverse_lazy('problem-list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            # If AJAX request, return JSON response
+            return JsonResponse({
+                'success': True,
+                'id': self.object.id,
+                'name': self.object.name
+            })
+        return response
+
+
+class TopicUpdateView(LoginRequiredMixin, UpdateView):
+    model = Topic
+    form_class = TopicForm
+    template_name = 'adeptly/topic_form.html'
+    success_url = reverse_lazy('problem-list')
+
+
+class TopicDeleteView(LoginRequiredMixin, DeleteView):
+    model = Topic
+    template_name = 'adeptly/topic_confirm_delete.html'
+    success_url = reverse_lazy('problem-list')
+    
+    def post(self, request, *args, **kwargs):
+        topic = self.get_object()
+        
+        # Check if the topic is used in any problems
+        if topic.problems.exists():
+            return render(request, 'adeptly/topic_in_use.html', {
+                'topic': topic,
+                'problem_count': topic.problems.count()
+            })
+        
+        return super().post(request, *args, **kwargs)
 
 @login_required
 def problem_preview(request, pk):

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Topic In Use - Adeptly Training{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h3 mb-0">Cannot Delete Topic</h1>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <p>
+                            The topic "{{ topic.name }}" cannot be deleted because it is used by {{ problem_count }} problem(s).
+                        </p>
+                        <p>
+                            Please remove this topic from all problems first, or edit the topic instead.
+                        </p>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'problem-list' %}" class="btn btn-primary">Back to Problems</a>
+                        <a href="{% url 'topic-update' topic.id %}" class="btn btn-warning">Edit Topic</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

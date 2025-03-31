@@ -22,6 +22,11 @@ urlpatterns = [
     path('problems/<int:pk>/update/', views.ProblemUpdateView.as_view(), name='problem-update'),
     path('problems/<int:pk>/delete/', views.ProblemDeleteView.as_view(), name='problem-delete'),
     
+    # Topic management
+    path('topics/new/', views.TopicCreateView.as_view(), name='topic-create'),
+    path('topics/<int:pk>/update/', views.TopicUpdateView.as_view(), name='topic-update'),
+    path('topics/<int:pk>/delete/', views.TopicDeleteView.as_view(), name='topic-delete'),
+    
     # Leaderboard
     path('leaderboard/', views.leaderboard, name='leaderboard'),
     

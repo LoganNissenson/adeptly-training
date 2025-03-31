@@ -708,6 +708,164 @@ class RegistrationFormTests(TestCase):
         self.assertTrue(user.check_password('Complex76Pass!@#'))
 
 
+class TopicManagementTests(TestCase):
+    """Tests for the topic management functionality"""
+    
+    def setUp(self):
+        """Set up test data for topic management tests"""
+        # Create a test user with login
+        self.user = User.objects.create_user(
+            username='testuser',
+            email='test@example.com',
+            password='testpassword'
+        )
+        self.client = Client()
+        self.client.login(username='testuser', password='testpassword')
+        
+        # Create a test topic
+        self.topic = Topic.objects.create(name='Test Topic')
+        
+        # Create a problem using the test topic
+        self.problem = Problem.objects.create(
+            name="Test Problem",
+            prompt="What is the answer?",
+            choice_a="A",
+            choice_b="B",
+            choice_c="C",
+            choice_d="D",
+            correct_answer="A",
+            estimated_time_to_complete=5,
+            difficulty=3
+        )
+        self.problem.topics.add(self.topic)
+    
+    def test_topic_creation(self):
+        """Test creating a new topic"""
+        # Get the topic creation URL
+        url = reverse('topic-create')
+        
+        # Submit a new topic
+        response = self.client.post(url, {'name': 'New Test Topic'})
+        
+        # Check successful redirect
+        self.assertEqual(response.status_code, 302)
+        
+        # Verify topic was created
+        self.assertTrue(Topic.objects.filter(name='New Test Topic').exists())
+    
+    def test_topic_update(self):
+        """Test updating a topic"""
+        # Get the topic update URL
+        url = reverse('topic-update', args=[self.topic.id])
+        
+        # Update the topic
+        response = self.client.post(url, {'name': 'Updated Topic Name'})
+        
+        # Check successful redirect
+        self.assertEqual(response.status_code, 302)
+        
+        # Verify topic was updated
+        self.topic.refresh_from_db()
+        self.assertEqual(self.topic.name, 'Updated Topic Name')
+    
+    def test_topic_delete(self):
+        """Test deleting a topic that is not in use"""
+        # Create a new topic (not used by any problem)
+        unused_topic = Topic.objects.create(name='Unused Topic')
+        
+        # Get the topic delete URL
+        url = reverse('topic-delete', args=[unused_topic.id])
+        
+        # Delete the topic
+        response = self.client.post(url)
+        
+        # Check successful redirect
+        self.assertEqual(response.status_code, 302)
+        
+        # Verify topic was deleted
+        self.assertFalse(Topic.objects.filter(name='Unused Topic').exists())
+    
+    def test_topic_delete_protection(self):
+        """Test that topics in use by problems cannot be deleted"""
+        # Get the topic delete URL for a topic in use
+        url = reverse('topic-delete', args=[self.topic.id])
+        
+        # Try to delete the topic
+        response = self.client.post(url)
+        
+        # Should not redirect but show the topic_in_use template
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'adeptly/topic_in_use.html')
+        
+        # Verify topic still exists
+        self.assertTrue(Topic.objects.filter(id=self.topic.id).exists())
+    
+    def test_topic_create_ajax(self):
+        """Test creating a topic through AJAX"""
+        # Get the topic creation URL
+        url = reverse('topic-create')
+        
+        # Submit a new topic with AJAX header
+        response = self.client.post(
+            url, 
+            {'name': 'AJAX Topic'}, 
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
+        
+        # Check JSON response
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('application/json', response['Content-Type'])
+        
+        # Verify topic was created
+        self.assertTrue(Topic.objects.filter(name='AJAX Topic').exists())
+
+
+class AddDefaultTopicsCommandTest(TestCase):
+    """Test the add_default_topics management command"""
+    
+    def test_command_execution(self):
+        """Test that the command creates the default topics"""
+        # Import the Command class
+        from adeptly.management.commands.add_default_topics import Command
+        
+        # Create a Buffer to capture output
+        from io import StringIO
+        out = StringIO()
+        
+        # Create and run the command
+        cmd = Command(stdout=out, stderr=StringIO())
+        cmd.handle()
+        
+        # Check that the topics were created
+        self.assertTrue(Topic.objects.filter(name='HVAC Design').exists())
+        self.assertTrue(Topic.objects.filter(name='Electrical Design').exists())
+        self.assertTrue(Topic.objects.filter(name='Refrigeration').exists())
+        
+        # Check the output
+        output = out.getvalue()
+        self.assertIn('Adding default topics to Adeptly', output)
+        
+    def test_command_idempotence(self):
+        """Test that running the command twice doesn't create duplicates"""
+        # Create one of the default topics beforehand
+        Topic.objects.create(name='HVAC Design')
+        
+        # Import the Command class
+        from adeptly.management.commands.add_default_topics import Command
+        
+        # Create a Buffer to capture output
+        from io import StringIO
+        out = StringIO()
+        
+        # Create and run the command
+        cmd = Command(stdout=out, stderr=StringIO())
+        cmd.handle()
+        
+        # Check that we have exactly one of each topic
+        self.assertEqual(Topic.objects.filter(name='HVAC Design').count(), 1)
+        self.assertEqual(Topic.objects.filter(name='Electrical Design').count(), 1)
+
+
 class EdgeCaseTests(TestCase):
     """Tests for edge cases and error handling"""
     
@@ -844,3 +1002,5 @@ class EdgeCaseTests(TestCase):
         
         # Should return 404 Not Found
         self.assertEqual(response.status_code, 404)
+
+

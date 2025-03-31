@@ -50,6 +50,15 @@ class TrainingPreferencesForm(forms.Form):
     )
 
 
+class TopicForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter topic name'}),
+        }
+
+
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text="Required. Enter a valid email address.")
     first_name = forms.CharField(max_length=30, required=True, help_text="Required.")
