@@ -1,0 +1,1203 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$kznSNglIg4vbjs0DUGeyaY$OrR9TlKD49OPBX2DKNf4eBO/YvSggrSAbU3RuDZTRfM=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "logannissenson",
+        "first_name": "",
+        "last_name": "",
+        "email": "logannissenson@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-03-30T19:33:49.098Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$0wNfkNCkYwKOH2tGNU3fIi$gcr4nW4Q558WgAkx/xowFrTw041yq0M33LzGEgV7krQ=",
+        "last_login": "2025-03-31T02:37:38.109Z",
+        "is_superuser": true,
+        "username": "logan",
+        "first_name": "",
+        "last_name": "",
+        "email": "logannissenson@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-03-30T20:21:01.848Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "f945cttqhevup2fmc5egewpdc0w4q1hz",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hAKFBiX7j0DGWBGqoYmpV0Z765NutDtf-_9l4i4rTVunZY4FXEWWpx-t4T5QW0H5Y7tNss8t3WZktwVedAur3Oh5-Vw_w4q9vqtoXjgYLV2FNAhsFHANkEZnc2saEg4qsDGG-9S0UxIQJgHExi0dSTeH-nROFU:1tz51u:jV2MOl7J66V6Gzd25svKz8LDWKhjmVYwc02Vyr7YseQ",
+        "expire_date": "2025-04-14T02:37:38.135Z"
+    }
+},
+{
+    "model": "adeptly.rank",
+    "pk": 1,
+    "fields": {
+        "name": "Beginner"
+    }
+},
+{
+    "model": "adeptly.rank",
+    "pk": 2,
+    "fields": {
+        "name": "Intermediate"
+    }
+},
+{
+    "model": "adeptly.rank",
+    "pk": 3,
+    "fields": {
+        "name": "Advanced"
+    }
+},
+{
+    "model": "adeptly.rank",
+    "pk": 4,
+    "fields": {
+        "name": "Expert"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 1,
+    "fields": {
+        "name": "HVAC Design"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 2,
+    "fields": {
+        "name": "HVAC Load Calculations"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 3,
+    "fields": {
+        "name": "Ductwork Design"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 4,
+    "fields": {
+        "name": "Refrigeration"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 5,
+    "fields": {
+        "name": "Energy Code Compliance"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 6,
+    "fields": {
+        "name": "Electrical Design"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 7,
+    "fields": {
+        "name": "Electrical Code Requirements"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 8,
+    "fields": {
+        "name": "Power Distribution"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 9,
+    "fields": {
+        "name": "Lighting Design"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 10,
+    "fields": {
+        "name": "Plumbing Systems"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 11,
+    "fields": {
+        "name": "Fire Protection"
+    }
+},
+{
+    "model": "adeptly.topic",
+    "pk": 12,
+    "fields": {
+        "name": "Control Systems"
+    }
+},
+{
+    "model": "adeptly.usertopicstats",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "topic": 1,
+        "experience": 90,
+        "rank": 1
+    }
+},
+{
+    "model": "adeptly.usertopicstats",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "topic": 3,
+        "experience": 20,
+        "rank": 1
+    }
+},
+{
+    "model": "adeptly.usertopicstats",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "topic": 2,
+        "experience": 30,
+        "rank": 1
+    }
+},
+{
+    "model": "adeptly.usertopicstats",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "topic": 5,
+        "experience": 30,
+        "rank": 1
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 1,
+    "fields": {
+        "name": "Sample HVAC Duct Sizing Problem",
+        "prompt": "A 30 ft long duct with a flow rate of 1,200 CFM needs to maintain a maximum friction rate of 0.08 in. wg per 100 ft. What is the appropriate duct diameter?",
+        "choice_a": "10 inches",
+        "choice_b": "12 inches",
+        "choice_c": "14 inches",
+        "choice_d": "16 inches",
+        "correct_answer": "A",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 2,
+        "topics": [
+            1,
+            3
+        ],
+        "solved_by": [
+            2
+        ]
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 2,
+    "fields": {
+        "name": "Psychrometrics - Mixed Air Conditions",
+        "prompt": "A HVAC system mixes outside air at 95\u00b0F dry-bulb temperature and 78\u00b0F wet-bulb temperature with return air at 75\u00b0F dry-bulb temperature and 50% relative humidity. The mixed air is 30% outside air by volume. Assuming standard atmospheric pressure, what is the mixed air dry-bulb temperature?",
+        "choice_a": "81\u00b0F",
+        "choice_b": "83\u00b0F",
+        "choice_c": "85\u00b0F",
+        "choice_d": "87\u00b0F",
+        "correct_answer": "A",
+        "problem_diagram": "problem_diagrams/hvac_mixed_air_diagram.svg",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            1
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 3,
+    "fields": {
+        "name": "Heating Load Calculation",
+        "prompt": "A rectangular room has dimensions of 15 ft \u00d7 20 ft with a ceiling height of 9 ft. The room has two exterior walls with 50 ft\u00b2 of windows (U-value = 0.35 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F) and 250 ft\u00b2 of wall area (U-value = 0.08 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F). The indoor design temperature is 72\u00b0F, and the outdoor design temperature is 10\u00b0F. Assuming an infiltration rate of 0.5 air changes per hour and neglecting internal heat gains, what is the approximate heating load for the room?",
+        "choice_a": "4,500 BTU/hr",
+        "choice_b": "6,700 BTU/hr",
+        "choice_c": "8,900 BTU/hr",
+        "choice_d": "11,200 BTU/hr",
+        "correct_answer": "C",
+        "problem_diagram": "problem_diagrams/heating_load_calculation_diagram.svg",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            2
+        ],
+        "solved_by": [
+            2
+        ]
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 4,
+    "fields": {
+        "name": "Refrigeration Cycle Analysis",
+        "prompt": "A vapor-compression refrigeration system operates with R-134a refrigerant. The following conditions are known: Evaporator temperature: 35\u00b0F, Condenser temperature: 110\u00b0F, Compressor isentropic efficiency: 80%, Refrigerant leaves the condenser as saturated liquid, Refrigerant enters the compressor as saturated vapor, Cooling load: 5 tons. What is the approximate coefficient of performance (COP) of the cycle?",
+        "choice_a": "2.1",
+        "choice_b": "3.2",
+        "choice_c": "4.3",
+        "choice_d": "5.4",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            4
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 5,
+    "fields": {
+        "name": "Duct Design - Pressure Loss",
+        "prompt": "A circular duct with a diameter of 12 inches carries 1,200 CFM of air at standard conditions. The duct has a length of 75 feet with three 90\u00b0 elbows (loss coefficient = 0.3 each) and one damper (loss coefficient = 0.2). Using a friction factor of 0.019 and air density of 0.075 lb/ft\u00b3, what is the total pressure loss in the duct system?",
+        "choice_a": "0.12 in. w.g.",
+        "choice_b": "0.25 in. w.g.",
+        "choice_c": "0.38 in. w.g.",
+        "choice_d": "0.51 in. w.g.",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            3
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 6,
+    "fields": {
+        "name": "Heat Transfer - Composite Wall",
+        "prompt": "A composite wall consists of three layers: 4 inches of concrete (k = 0.8 BTU/hr\u00b7ft\u00b7\u00b0F), 2 inches of fiberglass insulation (k = 0.023 BTU/hr\u00b7ft\u00b7\u00b0F), and 0.5 inches of gypsum board (k = 0.1 BTU/hr\u00b7ft\u00b7\u00b0F). The indoor air temperature is 70\u00b0F with a convection coefficient of 1.5 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F. The outdoor air temperature is 25\u00b0F with a convection coefficient of 4.0 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F. What is the overall heat transfer coefficient (U-value) of the wall assembly?",
+        "choice_a": "0.057 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F",
+        "choice_b": "0.078 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F",
+        "choice_c": "0.091 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F",
+        "choice_d": "0.105 BTU/hr\u00b7ft\u00b2\u00b7\u00b0F",
+        "correct_answer": "A",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            1,
+            5
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 7,
+    "fields": {
+        "name": "Cooling Tower Performance",
+        "prompt": "A cooling tower is used to cool 600 GPM of water from 95\u00b0F to 85\u00b0F. The ambient air wet-bulb temperature is 76\u00b0F, and the air flow rate is 60,000 CFM. What is the cooling tower approach?",
+        "choice_a": "6\u00b0F",
+        "choice_b": "9\u00b0F",
+        "choice_c": "12\u00b0F",
+        "choice_d": "15\u00b0F",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            1
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 8,
+    "fields": {
+        "name": "Pump Selection",
+        "prompt": "A chilled water system needs to deliver 200 GPM of water through a system with 100 ft of head loss. The pump will operate at 1750 RPM with water at 45\u00b0F. What is the required pump power?",
+        "choice_a": "4.2 horsepower",
+        "choice_b": "5.7 horsepower",
+        "choice_c": "7.1 horsepower",
+        "choice_d": "8.5 horsepower",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            1
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 9,
+    "fields": {
+        "name": "Energy Recovery Ventilation",
+        "prompt": "An energy recovery ventilator (ERV) is used to precondition outdoor air. The outdoor air is at 10\u00b0F dry-bulb and 8\u00b0F wet-bulb temperature, and the exhaust air is at 72\u00b0F dry-bulb and 58\u00b0F wet-bulb temperature. The ERV has a sensible effectiveness of 70% and a latent effectiveness of 60%. The air flow rate is 2,000 CFM on both sides. What is the supply air temperature leaving the ERV?",
+        "choice_a": "43.4\u00b0F",
+        "choice_b": "48.7\u00b0F",
+        "choice_c": "53.4\u00b0F",
+        "choice_d": "57.8\u00b0F",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            1,
+            5
+        ],
+        "solved_by": [
+            2
+        ]
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 10,
+    "fields": {
+        "name": "Fluid Mechanics - Pipe Flow",
+        "prompt": "Water at 60\u00b0F flows through a 3-inch diameter pipe at a rate of 150 GPM. The pipe has a length of 200 feet with four 90\u00b0 elbows (equivalent length = 5 ft each) and one globe valve (equivalent length = 60 ft). The pipe has a roughness factor of 0.0002 ft. What is the pressure drop in the pipe system?",
+        "choice_a": "2.4 psi",
+        "choice_b": "3.7 psi",
+        "choice_c": "5.1 psi",
+        "choice_d": "6.5 psi",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            1
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 11,
+    "fields": {
+        "name": "Thermodynamics - Air Compression",
+        "prompt": "An air compressor takes in air at standard atmospheric conditions (14.7 psia, 70\u00b0F) and compresses it to 100 psig. The compressor has an isentropic efficiency of 75% and a mechanical efficiency of 90%. The air flow rate is 300 CFM at the inlet. Assuming air behaves as an ideal gas with k = 1.4 and a specific heat at constant pressure of 0.24 BTU/lb\u00b7\u00b0F, what is the discharge temperature of the compressed air?",
+        "choice_a": "292\u00b0F",
+        "choice_b": "354\u00b0F",
+        "choice_c": "418\u00b0F",
+        "choice_d": "483\u00b0F",
+        "correct_answer": "D",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            1
+        ],
+        "solved_by": [
+            2
+        ]
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 12,
+    "fields": {
+        "name": "Three-Phase Power Calculation",
+        "prompt": "A balanced three-phase load is connected in wye configuration to a 480V, 60Hz power system. The load draws 50A per phase with a lagging power factor of 0.85. What is the real power consumed by the load?",
+        "choice_a": "28.2 kW",
+        "choice_b": "35.1 kW",
+        "choice_c": "40.8 kW",
+        "choice_d": "48.0 kW",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 2,
+        "topics": [
+            6,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 13,
+    "fields": {
+        "name": "Transformer Sizing",
+        "prompt": "A facility requires a three-phase transformer to supply a load of 200 kVA at 208V. The primary voltage is 4160V, and the transformer needs to have a 25% future load growth capacity. The transformer will be located outdoors in an area with an ambient temperature of 40\u00b0C. What is the minimum transformer kVA rating required?",
+        "choice_a": "200 kVA",
+        "choice_b": "225 kVA",
+        "choice_c": "250 kVA",
+        "choice_d": "300 kVA",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            6,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 14,
+    "fields": {
+        "name": "Fault Current Analysis",
+        "prompt": "A 2000 kVA, 13.8 kV/480V, three-phase transformer has an impedance of 5.75%. The available fault current at the primary of the transformer is 8000A. What is the maximum fault current available at the secondary of the transformer?",
+        "choice_a": "18.2 kA",
+        "choice_b": "24.5 kA",
+        "choice_c": "30.1 kA",
+        "choice_d": "36.8 kA",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            6,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 15,
+    "fields": {
+        "name": "Voltage Drop Calculation",
+        "prompt": "A 150 HP, 460V, three-phase motor is supplied by a feeder consisting of three #2/0 AWG THWN copper conductors in steel conduit. The feeder length is 250 feet, and the motor operates at 90% of full load with a power factor of 0.85 and an efficiency of 0.92. The conductor has a resistance of 0.0778 ohms/1000ft and a reactance of 0.0446 ohms/1000ft. What is the percentage voltage drop in the feeder?",
+        "choice_a": "1.8%",
+        "choice_b": "2.4%",
+        "choice_c": "3.2%",
+        "choice_d": "3.9%",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            6,
+            7
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 16,
+    "fields": {
+        "name": "Motor Starting Methods",
+        "prompt": "A 100 HP, 460V, three-phase induction motor has a full-load current of 124A, a locked-rotor current of 745A, and a starting power factor of 0.35. The motor is supplied from a utility service with a 500 kVA transformer that has an impedance of 5.5%. For autotransformer starting with a 65% tap, what is the approximate starting current?",
+        "choice_a": "245A",
+        "choice_b": "315A",
+        "choice_c": "385A",
+        "choice_d": "455A",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            6,
+            8,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 17,
+    "fields": {
+        "name": "Grounding System Design",
+        "prompt": "Design a substation ground grid for an area measuring 50 ft \u00d7 50 ft. The soil resistivity is 100 ohm-meters, and the maximum fault current is 10 kA with a clearing time of 0.5 seconds. The grid will use 4/0 AWG copper conductors spaced 10 ft apart in both directions with 8-ft ground rods at each intersection. What is the approximate grid resistance to remote earth?",
+        "choice_a": "0.9 ohms",
+        "choice_b": "1.4 ohms",
+        "choice_c": "2.0 ohms",
+        "choice_d": "2.7 ohms",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 5,
+        "topics": [
+            6,
+            7
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 18,
+    "fields": {
+        "name": "Power Factor Correction",
+        "prompt": "A facility has a load of 800 kW with a power factor of 0.75 lagging. The utility charges a power factor penalty when the power factor is below 0.95. What is the size of capacitor bank needed to improve the power factor to 0.95?",
+        "choice_a": "213 kVAR",
+        "choice_b": "252 kVAR",
+        "choice_c": "294 kVAR",
+        "choice_d": "344 kVAR",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 3,
+        "topics": [
+            6,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 19,
+    "fields": {
+        "name": "Overcurrent Protection Coordination",
+        "prompt": "A radial distribution system has three levels of protection: Main breaker (1600A frame, LSI trip unit), Feeder breaker (400A frame, LSI trip unit), and Load breaker (100A frame, thermal-magnetic trip). The maximum fault current available at the main breaker is 35 kA. The feeder serves several motor loads with a total full-load current of 320A and a momentary starting current of 1600A. What is the appropriate setting for the feeder breaker long-time pickup?",
+        "choice_a": "0.7 \u00d7 400A = 280A",
+        "choice_b": "0.8 \u00d7 400A = 320A",
+        "choice_c": "0.9 \u00d7 400A = 360A",
+        "choice_d": "1.0 \u00d7 400A = 400A",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 5,
+        "topics": [
+            6,
+            7,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 20,
+    "fields": {
+        "name": "Harmonics Analysis",
+        "prompt": "A variable frequency drive (VFD) generates the following harmonic current components (as a percentage of the fundamental): 5th harmonic: 23%, 7th harmonic: 11%, 11th harmonic: 9%, 13th harmonic: 7%, 17th harmonic: 4%, 19th harmonic: 3%. The VFD supplies a 50 HP motor with a fundamental current of 65A. What is the total harmonic distortion (THD) of the current?",
+        "choice_a": "20.4%",
+        "choice_b": "26.3%",
+        "choice_c": "28.7%",
+        "choice_d": "31.2%",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            6,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 21,
+    "fields": {
+        "name": "Load Flow Analysis",
+        "prompt": "A simple power system consists of: Generator: 10 MVA, 13.8 kV, X\"d = 15%, Transformer: 10 MVA, 13.8 kV/4.16 kV, Z = 6%, Transmission line: 5 miles, Z = 0.1 + j0.3 ohms/mile, Load: 8 MW at 0.8 power factor lagging. What is the approximate sending-end voltage needed to maintain 4.16 kV at the load?",
+        "choice_a": "4.32 kV",
+        "choice_b": "4.53 kV",
+        "choice_c": "4.78 kV",
+        "choice_d": "5.05 kV",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 5,
+        "topics": [
+            6,
+            8
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 22,
+    "fields": {
+        "name": "Analog vs Binary Control Points",
+        "prompt": "In a building automation system controlling an air handling unit, which of the following is NOT a typical application for an analog control point?",
+        "choice_a": "Variable frequency drive speed control",
+        "choice_b": "Discharge air temperature sensor",
+        "choice_c": "Fire alarm system status",
+        "choice_d": "Chilled water valve modulation",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 3,
+        "difficulty": 2,
+        "topics": [
+            1,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 23,
+    "fields": {
+        "name": "PID Controller Tuning",
+        "prompt": "A PID controller is being tuned for a VAV box with a 6-second actuator stroke time. The system exhibits sluggish response with significant overshoot. Which of the following control parameter adjustments would most effectively address this issue?",
+        "choice_a": "Increase the proportional gain and decrease the integral time",
+        "choice_b": "Decrease the proportional gain and increase the integral time",
+        "choice_c": "Increase both the proportional gain and derivative time",
+        "choice_d": "Decrease the proportional gain and increase the derivative time",
+        "correct_answer": "D",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 24,
+    "fields": {
+        "name": "DDC System Architecture",
+        "prompt": "In a multi-building campus BAS (Building Automation System) using BACnet, you need to design the network architecture. The system will have 12 buildings, each with approximately 1,500 points. Which network topology would be most appropriate?",
+        "choice_a": "Single flat network with all controllers as BACnet IP devices",
+        "choice_b": "Hierarchical system with BACnet IP backbone and MS/TP subnetworks",
+        "choice_c": "Star topology with a central server directly controlling all field devices",
+        "choice_d": "Peer-to-peer network using only BACnet MS/TP throughout",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 4,
+        "topics": [
+            1,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 25,
+    "fields": {
+        "name": "Variable Flow System Analysis",
+        "prompt": "A variable primary flow chilled water system with three chillers (500 tons each) is experiencing unstable operation during low-load conditions. The system has a minimum flow requirement of 20% of design flow. Which control strategy would best improve stable operation at low loads?",
+        "choice_a": "Install a bypass valve with flow meter controlled to maintain minimum flow",
+        "choice_b": "Implement a control algorithm to stage chillers based only on return water temperature",
+        "choice_c": "Install three-way valves on all coils instead of two-way valves",
+        "choice_d": "Operate all three chillers simultaneously at partial load",
+        "correct_answer": "A",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 4,
+        "topics": [
+            1,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 26,
+    "fields": {
+        "name": "Damper Control Sequencing",
+        "prompt": "For an air-handling unit with an economizer, both the minimum outside air damper and the economizer damper are fully open, but the return air damper is only partially open. What is the most likely system operating condition?",
+        "choice_a": "Free cooling mode with outdoor air temperature between return air and supply air setpoint",
+        "choice_b": "Mechanical cooling mode with 100% outdoor air required for IAQ",
+        "choice_c": "Mixed air temperature control with high cooling demand",
+        "choice_d": "Economizer fault with stuck outdoor air damper",
+        "correct_answer": "A",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            5,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 27,
+    "fields": {
+        "name": "Chiller Plant Optimization",
+        "prompt": "A chiller plant has four identical 350-ton chillers with varying efficiency curves. The plant operates under partial load conditions 85% of the time. Which control strategy would provide the best annual energy efficiency?",
+        "choice_a": "Base-loading the most efficient chiller and sequentially staging the others",
+        "choice_b": "Equal load sharing among all operating chillers",
+        "choice_c": "Operating chillers based on real-time efficiency monitoring to minimize total kW/ton",
+        "choice_d": "Running chillers in a rotating schedule to equalize run hours",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 4,
+        "topics": [
+            5,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 28,
+    "fields": {
+        "name": "VAV Terminal Unit Control",
+        "prompt": "A pressure-independent VAV terminal unit with a reheat coil is exhibiting unstable control. The space temperature oscillates \u00b13\u00b0F around setpoint, and the damper position constantly adjusts. What is the most likely cause of this issue?",
+        "choice_a": "Oversized terminal unit flow sensor",
+        "choice_b": "Improper PID loop tuning parameters",
+        "choice_c": "Undersized reheat coil valve",
+        "choice_d": "Insufficient supply air temperature",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            1,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 29,
+    "fields": {
+        "name": "Control Valve Sizing",
+        "prompt": "A heating hot water coil needs to deliver 200,000 BTU/hr with 180\u00b0F water and a 30\u00b0F temperature drop. The system operates at 25 psi differential pressure. What is the proper control valve Cv value for this application?",
+        "choice_a": "1.8",
+        "choice_b": "3.2",
+        "choice_c": "4.7",
+        "choice_d": "6.5",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            1,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 30,
+    "fields": {
+        "name": "Demand Control Ventilation",
+        "prompt": "A conference room designed for 50 occupants uses CO2-based demand control ventilation. The room has a ventilation requirement of 15 CFM per person and a base ventilation rate of 0.06 CFM/ft\u00b2 for building components. The room is 1,000 ft\u00b2. If the outdoor CO2 level is 400 ppm and the indoor CO2 setpoint is 1,000 ppm, what should the target maximum CO2 differential be for controlling the outdoor air damper?",
+        "choice_a": "400 ppm",
+        "choice_b": "600 ppm",
+        "choice_c": "800 ppm",
+        "choice_d": "1,000 ppm",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 4,
+        "topics": [
+            2,
+            5,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 31,
+    "fields": {
+        "name": "Fault Detection and Diagnostics",
+        "prompt": "A building automation system with fault detection capabilities reports that the cooling coil valve is commanded 100% open, but the leaving air temperature is not decreasing. The air handling unit uses chilled water for cooling. Which of the following is NOT a potential cause of this fault?",
+        "choice_a": "Air trapped in the cooling coil",
+        "choice_b": "Failed valve actuator",
+        "choice_c": "Chilled water pump failure",
+        "choice_d": "Dirty air filters",
+        "correct_answer": "D",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            1,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 32,
+    "fields": {
+        "name": "Control System Communication Protocols",
+        "prompt": "A project requires integration of multiple building systems including HVAC, lighting, and access control into a single management platform. The HVAC system uses BACnet MS/TP, the lighting control system uses DALI, and the access control system uses Modbus TCP. What is the most appropriate integration method?",
+        "choice_a": "Convert all systems to use Modbus RTU",
+        "choice_b": "Install gateways to translate protocols to BACnet IP and use it as the integration platform",
+        "choice_c": "Implement a proprietary protocol converter for each subsystem",
+        "choice_d": "Replace all controllers with dual-protocol devices",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 4,
+        "topics": [
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 33,
+    "fields": {
+        "name": "ASHRAE 62.1 - Ventilation Rate Procedure",
+        "prompt": "A classroom space of 800 ft\u00b2 has 25 students and 1 teacher. Using ASHRAE 62.1 Ventilation Rate Procedure, what is the minimum outdoor air requirement for this space? Assume the following: People outdoor air rate (Rp) = 10 cfm/person, Area outdoor air rate (Ra) = 0.12 cfm/ft\u00b2, Zone air distribution effectiveness (Ez) = 1.0.",
+        "choice_a": "260 cfm",
+        "choice_b": "296 cfm",
+        "choice_c": "325 cfm",
+        "choice_d": "356 cfm",
+        "correct_answer": "D",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 3,
+        "topics": [
+            1,
+            5
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 34,
+    "fields": {
+        "name": "ASHRAE 62.1 - Multiple Zone Systems",
+        "prompt": "An air handling system serves three zones with the following characteristics:\nZone 1: Voz = 500 cfm, Vpz = 2,000 cfm\nZone 2: Voz = 300 cfm, Vpz = 1,500 cfm\nZone 3: Voz = 400 cfm, Vpz = 1,200 cfm\nIf system ventilation efficiency (Ev) is 0.7, what is the outdoor air intake flow (Vot) required according to ASHRAE 62.1?",
+        "choice_a": "1,200 cfm",
+        "choice_b": "1,429 cfm",
+        "choice_c": "1,714 cfm",
+        "choice_d": "2,000 cfm",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 6,
+        "difficulty": 4,
+        "topics": [
+            1,
+            5
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 35,
+    "fields": {
+        "name": "Economizer Requirements - System Size",
+        "prompt": "According to ASHRAE 90.1-2019, in which of the following scenarios would an economizer NOT be required for a new HVAC system in climate zone 4A?",
+        "choice_a": "A 55,000 BTU/h packaged rooftop unit serving an office space",
+        "choice_b": "A 75,000 BTU/h split system serving a retail space",
+        "choice_c": "A 40,000 BTU/h heat pump serving a conference room",
+        "choice_d": "A 65,000 BTU/h water-source heat pump serving a classroom",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            1,
+            5,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 36,
+    "fields": {
+        "name": "Economizer Requirements - Climate Zones",
+        "prompt": "Per ASHRAE 90.1-2019, economizers are NOT required for comfort cooling systems in which of the following climate zones, regardless of cooling capacity?",
+        "choice_a": "Climate Zone 1A (Miami, FL)",
+        "choice_b": "Climate Zone 3B (Las Vegas, NV)",
+        "choice_c": "Climate Zone 4A (New York, NY)",
+        "choice_d": "Climate Zone 5B (Denver, CO)",
+        "correct_answer": "A",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            1,
+            5,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 37,
+    "fields": {
+        "name": "Boiler Efficiency - Gas-Fired Requirements",
+        "prompt": "According to ASHRAE 90.1-2019, what is the minimum thermal efficiency required for a new 2,500,000 BTU/h gas-fired hot water boiler?",
+        "choice_a": "80%",
+        "choice_b": "82%",
+        "choice_c": "84%",
+        "choice_d": "86%",
+        "correct_answer": "B",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 4,
+        "difficulty": 3,
+        "topics": [
+            1,
+            5
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.problem",
+    "pk": 38,
+    "fields": {
+        "name": "Boiler Efficiency - System Controls",
+        "prompt": "Per ASHRAE 90.1-2019, which of the following control strategies is NOT required for a hydronic heating system with multiple boilers and a design output capacity exceeding 1,000,000 BTU/h?",
+        "choice_a": "Outdoor air temperature reset controls",
+        "choice_b": "Sequencing controls for staging multiple boilers",
+        "choice_c": "Automatic isolation valves for each boiler",
+        "choice_d": "Variable flow pumping with VFDs",
+        "correct_answer": "C",
+        "problem_diagram": "",
+        "solution_diagram": "",
+        "estimated_time_to_complete": 5,
+        "difficulty": 4,
+        "topics": [
+            1,
+            5,
+            12
+        ],
+        "solved_by": []
+    }
+},
+{
+    "model": "adeptly.trainingsession",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "estimated_time_to_complete": 15,
+        "was_completed": false,
+        "correct_attempts": 0,
+        "incorrect_attempts": 0,
+        "created_at": "2025-03-30T20:40:52.488Z",
+        "completed_at": null,
+        "problems": [
+            1
+        ],
+        "problems_completed": [],
+        "topics_covered": [
+            3
+        ]
+    }
+},
+{
+    "model": "adeptly.trainingsession",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "estimated_time_to_complete": 15,
+        "was_completed": true,
+        "correct_attempts": 1,
+        "incorrect_attempts": 0,
+        "created_at": "2025-03-30T20:43:20.291Z",
+        "completed_at": "2025-03-30T20:43:29.544Z",
+        "problems": [
+            1
+        ],
+        "problems_completed": [
+            1
+        ],
+        "topics_covered": [
+            3
+        ]
+    }
+},
+{
+    "model": "adeptly.trainingsession",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "estimated_time_to_complete": 25,
+        "was_completed": true,
+        "correct_attempts": 3,
+        "incorrect_attempts": 2,
+        "created_at": "2025-03-30T23:09:07.828Z",
+        "completed_at": "2025-03-30T23:10:14.022Z",
+        "problems": [
+            2,
+            3,
+            8,
+            9,
+            11
+        ],
+        "problems_completed": [
+            3,
+            9,
+            11
+        ],
+        "topics_covered": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "adeptly.trainingsession",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "estimated_time_to_complete": 15,
+        "was_completed": false,
+        "correct_attempts": 0,
+        "incorrect_attempts": 1,
+        "created_at": "2025-03-30T23:18:47.848Z",
+        "completed_at": null,
+        "problems": [
+            1,
+            2,
+            10
+        ],
+        "problems_completed": [],
+        "topics_covered": [
+            1
+        ]
+    }
+},
+{
+    "model": "adeptly.topicexperienceearned",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "topic": 1,
+        "experience_earned": 20,
+        "training_session": 2,
+        "problem": 1,
+        "earned_at": "2025-03-30T20:43:29.310Z"
+    }
+},
+{
+    "model": "adeptly.topicexperienceearned",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "topic": 3,
+        "experience_earned": 20,
+        "training_session": 2,
+        "problem": 1,
+        "earned_at": "2025-03-30T20:43:29.393Z"
+    }
+},
+{
+    "model": "adeptly.topicexperienceearned",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "topic": 2,
+        "experience_earned": 30,
+        "training_session": 3,
+        "problem": 3,
+        "earned_at": "2025-03-30T23:09:59.827Z"
+    }
+},
+{
+    "model": "adeptly.topicexperienceearned",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "topic": 1,
+        "experience_earned": 30,
+        "training_session": 3,
+        "problem": 9,
+        "earned_at": "2025-03-30T23:10:10.674Z"
+    }
+},
+{
+    "model": "adeptly.topicexperienceearned",
+    "pk": 5,
+    "fields": {
+        "user": 2,
+        "topic": 5,
+        "experience_earned": 30,
+        "training_session": 3,
+        "problem": 9,
+        "earned_at": "2025-03-30T23:10:10.732Z"
+    }
+},
+{
+    "model": "adeptly.topicexperienceearned",
+    "pk": 6,
+    "fields": {
+        "user": 2,
+        "topic": 1,
+        "experience_earned": 40,
+        "training_session": 3,
+        "problem": 11,
+        "earned_at": "2025-03-30T23:10:13.887Z"
+    }
+}
+]

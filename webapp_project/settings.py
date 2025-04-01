@@ -5,6 +5,10 @@ Django settings for Adeptly project - a training platform for MEP engineers.
 from pathlib import Path
 import os
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -59,12 +63,30 @@ TEMPLATES = [
 WSGI_APPLICATION = 'webapp_project.wsgi.application'
 
 # Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Check if DATABASE_URL environment variable exists (for PostgreSQL)
+import dj_database_url
+
+# Determine which database to use
+USE_SQLITE_OVERRIDE = os.environ.get('USE_SQLITE', '').lower() == 'true'
+
+if USE_SQLITE_OVERRIDE or not os.environ.get('DATABASE_URL'):
+    # Use SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+    print("Using SQLite database")
+else:
+    # Use PostgreSQL or other database specified in DATABASE_URL
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+            conn_max_age=600,
+        )
+    }
+    print(f"Using database specified in DATABASE_URL environment variable")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

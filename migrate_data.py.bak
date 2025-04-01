@@ -1,0 +1,40 @@
+"""
+Script to migrate data from SQLite to PostgreSQL.
+
+This script should be run before deploying to Render.com with the PostgreSQL database.
+"""
+
+import os
+import sys
+import django
+from django.core.management import call_command
+
+def main():
+    print("Starting data migration from SQLite to PostgreSQL...")
+    
+    # Make sure we're using SQLite by temporarily removing any DATABASE_URL
+    original_db_url = os.environ.pop('DATABASE_URL', None)
+    
+    # Force Django to use SQLite settings
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'webapp_project.settings'
+    
+    # Initialize Django
+    django.setup()
+    
+    # Restore original DATABASE_URL if it existed
+    if original_db_url:
+        os.environ['DATABASE_URL'] = original_db_url
+    
+    # Dump data from SQLite
+    print("Dumping data from SQLite database...")
+    call_command('dumpdata', exclude=['contenttypes', 'auth.permission'], output='data_dump.json')
+    
+    print("Data dump completed. Now switch to PostgreSQL...")
+    print("Update your .env file with the PostgreSQL DATABASE_URL and run:")
+    print("python manage.py migrate")
+    print("python manage.py shell -c 'from django.contrib.contenttypes.models import ContentType; ContentType.objects.all().delete()'")
+    print("python manage.py loaddata data_dump.json")
+    print("Done!")
+
+if __name__ == "__main__":
+    main()

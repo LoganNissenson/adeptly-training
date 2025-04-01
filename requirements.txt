@@ -2,3 +2,6 @@ Django==4.2.10
 gunicorn==21.2.0
 Pillow==10.1.0  # For image processing
 whitenoise==6.5.0  # For static files in production
+psycopg2-binary==2.9.9  # PostgreSQL adapter
+dj-database-url==2.1.0  # For parsing database URLs
+python-dotenv==1.0.0  # For loading environment variables

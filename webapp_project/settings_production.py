@@ -23,13 +23,15 @@ MIDDLEWARE = [
 # WhiteNoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Database configuration (use SQLite for simplicity on Render)
-# You can switch to PostgreSQL later if needed
+# Database configuration using PostgreSQL on Render
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        # This will use the DATABASE_URL environment variable from Render
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 # Security settings
@@ -39,3 +41,12 @@ CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 
 # For Render.com deployment
+
+# Configure connection pooling for PostgreSQL
+DATABASE_OPTIONS = {
+    'connect_timeout': 60,
+    'options': '-c statement_timeout=30000'
+}
+
+# Make sure migration files use the right column types for PostgreSQL
+DATABASE_ENGINE = 'django.db.backends.postgresql'
