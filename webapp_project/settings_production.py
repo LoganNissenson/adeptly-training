@@ -50,34 +50,3 @@ DATABASE_OPTIONS = {
 
 # Make sure migration files use the right column types for PostgreSQL
 DATABASE_ENGINE = 'django.db.backends.postgresql'
-
-# Auto-run migrations on startup (for Render.com deployment)
-import sys
-from django.core.management import call_command
-
-# Only run migrations when not in shell or testing mode
-if 'shell' not in sys.argv and 'test' not in sys.argv and 'makemigrations' not in sys.argv:
-    try:
-        print("Auto-running migrations on startup...")
-        from django.db.migrations.executor import MigrationExecutor
-        from django.db import connections, DEFAULT_DB_ALIAS
-        
-        connection = connections[DEFAULT_DB_ALIAS]
-        connection.prepare_database()
-        executor = MigrationExecutor(connection)
-        executor.loader.build_graph()
-        
-        # Only run migrations if there are unapplied ones
-        if executor.migration_plan(executor.loader.graph.leaf_nodes()):
-            call_command('migrate', no_input=True)
-            print("Database migrations applied successfully.")
-            
-            # Now run the setup command to initialize data
-            try:
-                print("Running Adeptly setup...")
-                call_command('setup_adeptly')
-                print("Adeptly setup completed successfully.")
-            except Exception as e:
-                print(f"Error running Adeptly setup: {e}")
-    except Exception as e:
-        print(f"Error running migrations: {e}")

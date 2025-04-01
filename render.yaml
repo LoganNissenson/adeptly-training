@@ -3,7 +3,7 @@ services:
   - type: web
     name: adeptly
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: bash render_build.sh
     startCommand: gunicorn webapp_project.render_wsgi:application
     envVars:
       - key: PYTHON_VERSION
